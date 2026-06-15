@@ -34,15 +34,31 @@ const ConfirmModal = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-modal-title"
-        onClick={(event) => event.stopPropagation()}
+        // Zamiast onClick na divie, po prostu nie używamy tutaj stopPropagation.
+        // Kliknięcie w przyciski wewnątrz (cancel/confirm) i tak nie wywoła onCancel 
+        // z overlay, bo zdarzenie wewnątrz przycisków jest izolowane.
       >
         <h3 id="confirm-modal-title">{title}</h3>
         <p>{message}</p>
         <div className={styles.actions}>
-          <button type="button" className={styles.cancel} onClick={onCancel}>
+          <button 
+            type="button" 
+            className={styles.cancel} 
+            onClick={(e) => {
+              e.stopPropagation(); // Przenosimy stopPropagation tutaj
+              onCancel();
+            }}
+          >
             {cancelLabel}
           </button>
-          <button type="button" className={styles.confirm} onClick={onConfirm}>
+          <button 
+            type="button" 
+            className={styles.confirm} 
+            onClick={(e) => {
+              e.stopPropagation(); // Przenosimy stopPropagation tutaj
+              onConfirm();
+            }}
+          >
             {confirmLabel}
           </button>
         </div>
