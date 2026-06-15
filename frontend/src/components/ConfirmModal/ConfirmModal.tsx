@@ -23,7 +23,12 @@ const ConfirmModal = ({
   if (!visible) return null;
 
   return (
-    <div className={styles.modalOverlay} role="presentation" onClick={onCancel}>
+    <button 
+      type="button" 
+      className={styles.modalOverlay} 
+      onClick={onCancel}
+      aria-label="Zamknij okno modalne"
+    >
       <div
         className={styles.modal}
         role="dialog"
@@ -42,7 +47,7 @@ const ConfirmModal = ({
           </button>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

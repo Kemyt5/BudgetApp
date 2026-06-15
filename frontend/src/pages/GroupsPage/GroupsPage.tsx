@@ -75,26 +75,32 @@ const GroupsPage: React.FC = () => {
           value={newGroupName}
           onChange={(e) => setNewGroupName(e.target.value)}
         />
-        <button onClick={handleCreateGroup}>Utwórz Grupę</button>
+        <button type="button" onClick={handleCreateGroup}>
+          Utwórz Grupę
+        </button>
       </div>
 
       <ul className={styles.list}>
         {groups.map((group) => (
-          <li
-            key={group.id}
-            onClick={() => setSelectedGroup(group)}
-            className={styles.groupItem}
-          >
-            {group.name}
+          <li key={group.id} className={styles.groupItem}>
+            <button
+              type="button"
+              className={styles.groupButton}
+              onClick={() => setSelectedGroup(group)}
+            >
+              {group.name}
+            </button>
+            
             {String(user?.id) === String(group.ownerId) && (
               <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setGroupToDelete(group);
-              }}
-              className={styles.deleteButton}
-            >
-              Usuń
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setGroupToDelete(group);
+                }}
+                className={styles.deleteButton}
+              >
+                Usuń
               </button>
             )}
           </li>
